@@ -1,15 +1,14 @@
-# Use an official OpenJDK runtime as a parent image
 FROM openjdk:8-jdk-alpine
 
-# Set the working directory in the container
-WORKDIR /app
+# Define the JAR file location
+ARG JAR_FILE=target/spring-boot-app-1.0.0.jar
 
-# Copy the JAR file built by Maven/Gradle into the container
-ARG JAR_FILE=build/libs/*.jar
+# Copy the JAR file into the Docker container
 COPY ${JAR_FILE} app.jar
 
-# Expose the port the app runs on
+# Expose the port your app will run on
 EXPOSE 8080
 
-# Run the jar file
+# Run the JAR file
 ENTRYPOINT ["java","-jar","/app.jar"]
+
